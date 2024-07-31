@@ -8,5 +8,7 @@ urlpatterns = [
     path('category/<int:pk>', views.get_exact_category),
     path('add-to-cart/<int:pk>', views.to_cart),
     path('del-from-cart/<int:pk>', views.del_from_cart),
-    path('cart', views.get_user_cart)
+    path('cart', views.get_user_cart),
+    path('search', views.search_product),
+    # path('register', views.register)
 ]

@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Product, Category, Cart
+from django.contrib.auth import login, authenticate
+from .forms import RegisterForm
 
 
 # Create your views here.
@@ -56,3 +58,17 @@ def del_from_cart(request, pk):
                         user_product=product_to_delete).delete()
 
     return redirect('/cart')
+
+
+def search_product(request):
+    if request.method == 'POST':
+        get_product = request.POST.get('search_product')
+
+        try:
+            exact_product = Product.objects.get(pr_name__icontains=get_product)
+            return redirect(f'product/{exact_product.id}')
+        except:
+            print('не нашел')
+            return redirect('/')
+
+

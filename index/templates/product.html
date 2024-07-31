@@ -6,11 +6,12 @@
     <title>{{ product.pr_name }}</title>
 </head>
 <body class="text-bg-dark">
+{% csrf_token %}
 <div class="container px-4 py-5" id="featured-3">
     <h2 class="pb-2 border-bottom">{{ product.pr_name }}</h2>
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
       <div class="col-9 col-sm-8 col-lg-6">
-        <img src="{{ product.pr_photo }}" class="d-block mx-lg-auto img-fluid" alt="{{ product.pr_name }}" width="800" height="1020" loading="lazy" style="filter: invert(0);">
+        <img src="{{ product.pr_photo.url }}" class="d-block mx-lg-auto img-fluid" alt="{{ product.pr_name }}" width="800" height="1020" loading="lazy" style="filter: invert(0);">
       </div>
       <div class="col-lg-6">
         <h1 class="display-5 fw-bold text-whitelink bg-dark lh-1 mb-3">Описание:</h1>
