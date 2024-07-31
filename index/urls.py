@@ -10,5 +10,6 @@ urlpatterns = [
     path('del-from-cart/<int:pk>', views.del_from_cart),
     path('cart', views.get_user_cart),
     path('search', views.search_product),
-    # path('register', views.register)
+    path('register', views.Register.as_view()),
+    path('logout', views.logout_view)
 ]

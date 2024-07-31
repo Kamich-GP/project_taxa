@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Product, Category, Cart
-from django.contrib.auth import login, authenticate
 from .forms import RegisterForm
+from django.views import View
+from django.contrib.auth import login, logout
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -72,3 +74,30 @@ def search_product(request):
             return redirect('/')
 
 
+class Register(View):
+    template_name = 'registration/register.html'
+
+
+    def get(self, request):
+        context = {'form': RegisterForm}
+        return render(request, self.template_name, context)
+
+
+    def post(self, request):
+        form = RegisterForm(request.POST)
+
+        if form.is_valid():
+            username = form.clean_username()
+            password2 = form.clean_password2()
+            email = form.cleaned_data().get('email')
+            user = User.objects.create_user(username, password=password2, email=email)
+            user.save()
+            login(request, user)
+            return redirect('/')
+        context = {'form': RegisterForm}
+        return render(request, self.template_name, context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')

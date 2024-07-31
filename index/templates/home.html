@@ -14,24 +14,51 @@
       <span class="fs-4 text-white bg-dark">Добро пожаловать</span>
     </a>
     <hr>
+    <form method="post" action="search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+    {% csrf_token %}
+    <input type="search" class="form-control form-control-dark" placeholder="Поиск..."
+           aria-label="Search" name="search_product">
+        <button type="submit" class="btn btn-primary">Поиск</button>
+    </form>
+    <hr>
     {% for c in categories %}
-    <ul class="nav nav-pills flex-column mb-auto">
+    <ul class="nav nav-pills flex-column mb-2">
       <li class="nav-item">
         <a href="/category/{{ c.id }}" class="nav-link active" aria-current="page">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="/category/{{ c.id }}"></use></svg>
+          <svg class="bi pe-none me-2" width="1" height="1"><use xlink:href="/category/{{ c.id }}"></use></svg>
             {{ c }}
         </a>
       </li>
-        <br>
     </ul>
     {% endfor %}
     <hr>
+    {% if user.is_authenticated %}
+    <ul class="nav nav-pills flex-column mb-2">
+      <li class="nav-item">
+        <a href="/logout" class="nav-link active" aria-current="page">
+          <svg class="bi pe-none me-2" width="1" height="1"><use xlink:href="/logout"></use></svg>
+            Выйти
+        </a>
+      </li>
+    </ul>
+    {% else %}
+    <ul class="nav nav-pills flex-column mb-2">
+      <li class="nav-item">
+        <a href="/accounts/login" class="nav-link active" aria-current="page">
+          <svg class="bi pe-none me-2" width="1" height="1"><use xlink:href="/accounts/login"></use></svg>
+            Войти
+        </a>
+      </li>
+    </ul><ul class="nav nav-pills flex-column mb-2">
+      <li class="nav-item">
+        <a href="/register" class="nav-link active" aria-current="page">
+          <svg class="bi pe-none me-2" width="1" height="1"><use xlink:href="/register"></use></svg>
+            Регистрация
+        </a>
+      </li>
+    </ul>
+    {% endif %}
 </div>
-<form method="post" action="search">
-    {% csrf_token %}
-    <input type="text" placeholder="Поиск" name="search_product">
-    <button>Поиск</button>
-</form>
 
 <div class="container px-4 py-5" id="featured-3">
     <h2 class="pb-2 border-bottom">Продукты</h2>
