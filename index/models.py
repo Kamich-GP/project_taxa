@@ -27,4 +27,4 @@ class Cart(models.Model):
     user_product_quantity = models.IntegerField()
 
     def __str__(self):
-        return self.user_id
+        return str(self.user_id)

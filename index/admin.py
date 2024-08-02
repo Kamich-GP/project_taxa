@@ -16,3 +16,10 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['pr_name', 'id']
     list_display = ['pr_name', 'id']
     ordering = ['-id']
+
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    search_fields = ['user_product', 'id']
+    list_display = ['user_product', 'id']
+    ordering = ['-id']

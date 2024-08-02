@@ -11,5 +11,5 @@ urlpatterns = [
     path('cart', views.get_user_cart),
     path('search', views.search_product),
     path('register', views.Register.as_view()),
-    path('logout', views.logout_view)
+    path('logout', views.logout_view),
 ]
