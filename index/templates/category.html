@@ -9,11 +9,10 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-dark" style="width: 280px;">
 <div class="container px-1 py-5" id="featured-3">
     <h2 class="pb-2 border-bottom">Продукты</h2>
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
         {% for p in products %}
       <div class="feature col">
         <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-            <img src="{{ p.pr_photo }}" alt="">
+            <img src="{{ p.pr_photo.url }}" width="200" height="200" alt="" class="img">
         </div>
         <h3 class="fs-2 text-whitelink bg-dark">{{ p.pr_name }}</h3>
         <p>{{ p.pr_des }}</p>
@@ -23,7 +22,6 @@
         </a>
       </div>
         {% endfor %}
-    </div>
 </div>
 </div>
 </body>

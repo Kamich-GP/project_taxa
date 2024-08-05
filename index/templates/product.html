@@ -18,14 +18,29 @@
         <p class="lead">{{ product.pr_des }}</p>
         <h1 class="display-5 fw-bold text-whitelink bg-dark lh-1 mb-3">Категория:</h1>
         <p class="lead"><a href="/category/{{ product.pr_category.id }}">{{ product.pr_category }}</a></p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <form method="post" action="/add-to-cart/{{ product.id }}">
-                {% csrf_token %}
-                <p><input type="number" min="1" name="user_product_quantity"></p>
-                <p><button type="submit" class="btn btn-primary btn-lg px-4 me-md-1">В корзину</button></p>
-                <p class="lead">Цена: <button type="button" class="btn btn-outline-secondary btn-lg px-4">${{ product.pr_price }}</button></p>
-            </form>
-        </div>
+          {% if user.is_authenticated %}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <form method="post" action="/add-to-cart/{{ product.id }}">
+                    {% csrf_token %}
+                    <p><input type="number" min="1" name="user_product_quantity"></p>
+                    <p><button type="submit" class="btn btn-primary btn-lg px-4 me-md-1">В корзину</button></p>
+                    <p class="lead">Цена: <button type="button" class="btn btn-outline-secondary btn-lg px-4">${{ product.pr_price }}</button></p>
+                </form>
+            </div>
+          {% else %}
+          <h1 class="display-5 fw-bold text-whitelink bg-dark lh-1 mb-3">Авторизуйтесь для покупки!</h1>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+              <p class="lead"><button class="btn btn-success btn-lg px-4"><a href="/accounts/login" class="nav-link active" aria-current="page">
+                  <svg class="bi pe-none" width="1" height="1"><use xlink:href="/accounts/login"></use></svg>Войти
+              </a>
+              </button></p>
+              <p class="lead"><button class="btn btn-warning btn-lg px-4"><a href="/register" class="nav-link active" aria-current="page">
+                  <svg class="bi pe-none" width="1" height="1"><use xlink:href="/register"></use></svg>Регистрация
+              </a>
+              </button></p>
+              <p class="lead">Цена: <button type="button" class="btn btn-outline-secondary btn-lg px-4">${{ product.pr_price }}</button></p>
+            </div>
+          {% endif %}
       </div>
     </div>
 </div>
